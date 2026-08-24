@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>File Change Hotspot Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px 12px; border: 1px solid #ccc; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>File Change Hotspot Report</h1>
+    <div id='report'></div>
+    <script>
+        fetch('report.json')
+            .then(response => response.json())
+            .then(data => {
+                const table = `<table>\n  <tr>\n    <th>File</th>\n    <th>Change Count</th>\n  </tr>\n  ${data.map(file => `<tr><td>${file.file}</td><td>${file.count}</td></tr>`).join('')}\n</table>`;
+                document.getElementById('report').innerHTML = table;
+            });
+    </script>
+</body>
+</html>
